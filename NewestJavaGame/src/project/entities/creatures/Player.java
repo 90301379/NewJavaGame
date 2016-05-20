@@ -109,13 +109,15 @@ public class Player extends Creature {
 		System.out.println("You lose");
 	}
 	
-	public void collidesWith(int x, int y){
+	public boolean collidesWith(int x, int y){
 		
 		if((int)this.getX() == x || (int)this.getY() == y){
 			
 			System.out.println("Colides with x and y");
-			
+			return true;
 		}
+		return false;
+
 	
 	}
 	

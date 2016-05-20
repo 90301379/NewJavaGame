@@ -55,6 +55,18 @@ public class World {
 		int x = (int)entityManager.getPlayer().getX();
 		int y = (int)entityManager.getPlayer().getY();
 		
+		
+		for(int i = 0; i < 60 ; i++){
+			for(int j = 0; j < 60 ; j++){
+
+		
+		if(entityManager.getPlayer().collidesWith(i, j)){
+			
+		}
+		
+		
+		}}
+		
 	}
 	
 	public void render(Graphics g){
