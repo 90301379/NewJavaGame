@@ -111,9 +111,9 @@ public class Player extends Creature {
 	
 	public boolean collidesWith(int x, int y){
 		
-		if((int)this.getX() == x || (int)this.getY() == y){
-			
-			System.out.println("Colides with x and y");
+		if((int)this.getX() == x && (int)this.getY() == y){
+			System.out.println("Colides with x ansdasdadd y | "+x+","+y);
+			System.out.println("Colides with x and y | "+this.getX()+","+this.getY());
 			return true;
 		}
 		return false;

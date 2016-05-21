@@ -56,8 +56,8 @@ public class World {
 		int y = (int)entityManager.getPlayer().getY();
 		
 		
-		for(int i = 0; i < 60 ; i++){
-			for(int j = 0; j < 60 ; j++){
+		for(int i = 0; i < 64 ; i++){
+			for(int j = 0; j < 64 ; j++){
 
 		
 		if(entityManager.getPlayer().collidesWith(i, j)){
