@@ -3,6 +3,7 @@ package project.worlds;
 import java.awt.Graphics;
 
 import project.entities.EntityManager;
+import project.entities.creatures.Follow;
 import project.entities.creatures.Player;
 import project.entities.statics.Rock;
 import project.entities.statics.GreenTower;
@@ -21,7 +22,8 @@ public class World {
 	//Entities
 	private EntityManager entityManager;
 	private GreenTower gt; 
-	
+	private Follow test; 
+
 	
 	int xTower1;
 	int yTower1;
@@ -30,24 +32,32 @@ public class World {
 	public World(Handler handler, String path){
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		
 		// Temporary entity code!
 //		entityManager.addEntity(new Tree(handler, 100, 100));
 //		entityManager.addEntity(new Rock(handler, 100, 450));
-		GreenTower gt = new GreenTower(handler, 448, 960);
+	    gt = new GreenTower(handler, 384, 384);
+		
+		test = new Follow(handler, 170, 180);
+
+
 		
 		xTower1 = (int)gt.getX();
 		yTower1 = (int)gt.getY();
 
      	entityManager.addEntity(gt);
-     	entityManager.addEntity(new RedTower(handler, 1088, 320));
+     	entityManager.addEntity(test);
+
+     	entityManager.addEntity(new RedTower(handler, 2688, 384));
 
 		loadWorld(path);
 		
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
-
 		
 	}
+
+	
 	
 	public void tick(){
 		entityManager.tick();
@@ -67,6 +77,7 @@ public class World {
 		
 		}}
 		
+		test.followPlayer(entityManager.getPlayer());
 	}
 	
 	public void render(Graphics g){
