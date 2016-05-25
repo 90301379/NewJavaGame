@@ -3,7 +3,8 @@ package project.worlds;
 import java.awt.Graphics;
 
 import project.entities.EntityManager;
-import project.entities.creatures.Follow;
+import project.entities.creatures.TurretShotGreen;
+import project.entities.creatures.TurretShotRed;
 import project.entities.creatures.Player;
 import project.entities.statics.Rock;
 import project.entities.statics.GreenTower;
@@ -21,8 +22,12 @@ public class World {
 	private int[][] tiles;
 	//Entities
 	private EntityManager entityManager;
-	private GreenTower gt; 
-	private Follow test; 
+	
+	private GreenTower towerGreen; 
+	private RedTower towerRed; 
+	
+	private TurretShotGreen turretShotGreen; 
+	private TurretShotRed turretShotRed; 
 
 	
 	int xTower1;
@@ -33,51 +38,33 @@ public class World {
 		this.handler = handler;
 		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
 		
-		// Temporary entity code!
-//		entityManager.addEntity(new Tree(handler, 100, 100));
-//		entityManager.addEntity(new Rock(handler, 100, 450));
-	    gt = new GreenTower(handler, 384, 384);
+		//Temporary entity code!
+		//entityManager.addEntity(new Tree(handler, 100, 100));
+		//entityManager.addEntity(new Rock(handler, 100, 450));
 		
-		test = new Follow(handler, 170, 180);
-
-
-		
-		xTower1 = (int)gt.getX();
-		yTower1 = (int)gt.getY();
-
-     	entityManager.addEntity(gt);
-     	entityManager.addEntity(test);
-
-     	entityManager.addEntity(new RedTower(handler, 2688, 384));
-
 		loadWorld(path);
 		
+		//Init Turrets
+	    towerGreen = new GreenTower(handler, 384, 384);
+     	entityManager.addEntity(towerGreen);
+     	towerRed = new RedTower(handler, 2688, 384);
+     	entityManager.addEntity(towerRed);
+
+		//Init Turret Shot Entities
+		turretShotGreen = new TurretShotGreen(handler, 170, 180);
+     	entityManager.addEntity(turretShotGreen);
+     	
 		entityManager.getPlayer().setX(spawnX);
 		entityManager.getPlayer().setY(spawnY);
 		
 	}
-
-	
 	
 	public void tick(){
+		
 		entityManager.tick();
-		
-		int x = (int)entityManager.getPlayer().getX();
-		int y = (int)entityManager.getPlayer().getY();
-		
-		
-		for(int i = 0; i < 64 ; i++){
-			for(int j = 0; j < 64 ; j++){
 
+		turretShotGreen.followPlayer(entityManager.getPlayer());
 		
-		if(entityManager.getPlayer().collidesWith(i, j)){
-			
-		}
-		
-		
-		}}
-		
-		test.followPlayer(entityManager.getPlayer());
 	}
 	
 	public void render(Graphics g){

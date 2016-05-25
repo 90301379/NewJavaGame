@@ -26,7 +26,7 @@ public class Player extends Creature {
 	private Ability e = new Ability("This is an e",Assets.player_down[0]);
 	private Ability r = new Ability("This is an R",Assets.player_down[0]);
 
-	private Stats stat = new Stats();
+	public Stats stat = new Stats();
 	
 	
 	
@@ -46,6 +46,8 @@ public class Player extends Creature {
 		animRight = new Animation(500, Assets.player_right);
 		
 		HUD = new playerHud(q, w, e, r, stat);
+		
+		stat.health = 10000;
 	}
 
 	@Override
@@ -145,10 +147,12 @@ public class Player extends Creature {
 		g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 		
 		HUD.render(g);
+		
 //		g.setColor(Color.red);
 //		g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
 //				(int) (y + bounds.y - handler.getGameCamera().getyOffset()),
 //				bounds.width, bounds.height);
+		
 	}
 	
 	private BufferedImage getCurrentAnimationFrame(){
@@ -161,6 +165,11 @@ public class Player extends Creature {
 		}else{
 			return animDown.getCurrentFrame();
 		}
+	}
+
+	public void damage(int i) {
+		this.stat.health = this.stat.health - 500;
+		
 	}
 
 }

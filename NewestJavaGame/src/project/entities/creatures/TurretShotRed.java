@@ -9,32 +9,36 @@ import project.gfx.Animation;
 import project.gfx.Assets;
 import project.tileGame.Handler;
 
-public class Follow extends Creature {
+public class TurretShotRed extends Creature {
 
 	// Animations
 	private Animation animDown, animUp, animLeft, animRight;
 	// Attack timer
 	private long lastAttackTimer, attackCooldown = 200, attackTimer = attackCooldown;
 
-	public Follow(Handler handler, float x, float y) {
+	private boolean alive = true;
+	
+	public TurretShotRed(Handler handler, float x, float y) {
 		super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
-		
-		speed = 1.0f;
-		bounds.x = 22;
-		bounds.y = 44;
-		bounds.width = 19;
-		bounds.height = 19;
-		
+
+		speed = 0.1f;
+		bounds.x = 0;
+		bounds.y = 0;
+		bounds.width = 0;
+		bounds.height = 0;
+
 		// Animatons
 		animDown = new Animation(500, Assets.player_down);
 		animUp = new Animation(500, Assets.player_up);
 		animLeft = new Animation(500, Assets.player_left);
 		animRight = new Animation(500, Assets.player_right);
-		
+
 	}
 
 	@Override
 	public void tick() {
+		
+		if (alive) {
 		// Animations
 		animDown.tick();
 		animUp.tick();
@@ -42,8 +46,11 @@ public class Follow extends Creature {
 		animLeft.tick();
 		// Movement
 		move();
+		this.speed = this.speed + 0.05F;
 		// handler.getGameCamera().centerOnEntity(this);
-
+		
+		}
+	
 	}
 
 	private void checkAttacks() {
@@ -89,18 +96,7 @@ public class Follow extends Creature {
 
 	@Override
 	public void die() {
-//		System.out.println("You lose");
-	}
-
-	public boolean collidesWith(int x, int y) {
-
-		if ((int) this.getX() == x && (int) this.getY() == y) {
-			System.out.println("Colides with x ansdasdadd y | " + x + "," + y);
-			System.out.println("Colides with x and y | " + this.getX() + "," + this.getY());
-			return true;
-		}
-		return false;
-
+		System.out.println("You lose");
 	}
 
 	private boolean movingUp;
@@ -108,104 +104,69 @@ public class Follow extends Creature {
 	private boolean movingLeft;
 	private boolean movingRight;
 
-	int closestX;
-	int closestY;
-
-	private void getClosestPoint(Player p) {
-
-		// At Bottom
-		if (this.getY() > p.getY()) {
-			yMove = -speed;
-			movingUp = true;
-			System.out.println("Up");
-		}
-
-		// At Top
-		if (this.getY() < p.getY()) {
-			yMove = speed;
-			movingDown = true;
-			System.out.println("Down");
-		}
-
-		// At Left
-		if (this.getX() > p.getX()) {
-			xMove = -speed;
-			movingLeft = true;
-			System.out.println("Left");
-		}
-
-		// At Right
-		if (this.getX() < p.getX()) {
-			xMove = speed;
-			movingRight = true;
-			System.out.println("Right");
-		}
-
-	}
-
 	public void followPlayer(Player P) {
+
 		xMove = 0;
 		yMove = 0;
 
 		// getClosestPoint(P);
-		//    Above                            Below
-		if (((this.getY() < P.getY() - 32) || (this.getY() > P.getY() + 32))
-		//    Left                             Right
-		 || ((this.getX() < P.getX() - 32) || (this.getX() > P.getX() + 32))) {
+		// Above Below
+		if (((this.getY() < P.getY() - 20) || (this.getY() > P.getY() + 20))
+				// Left Right
+				|| ((this.getX() < P.getX() - 20) || (this.getX() > P.getX() + 20))) {
 
 			// Up
 			if (this.getY() > P.getY()) {
 				yMove = -speed;
 				movingUp = true;
 				System.out.println("Up");
-			} else {
-				movingUp = false;
 			}
 			// Down
 			if (this.getY() < P.getY()) {
 				yMove = speed;
 				movingDown = true;
 				System.out.println("Down");
-			} else {
-				movingDown = false;
 			}
 			// Right
 			if (this.getX() > P.getX()) {
 				xMove = -speed;
 				movingLeft = true;
 				System.out.println("Left");
-			} else {
-				movingLeft = false;
 			}
-
 			// Left
 			if (this.getX() < P.getX()) {
 				xMove = speed;
 				movingRight = true;
 				System.out.println("Right");
-			} else {
-				movingRight = false;
 			}
-		} //
-
-		if (handler.getMouseManager().isLeftPressed()) {
-			xMove = speed * 2;
+		} else {
+			
+			if(alive){
+			P.stat.health = P.stat.health - 500;
+			}
+			alive = false;
 		}
 
 	}
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
-				(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
+		if (alive) {
+			g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
+					(int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+		}
 		// g.setColor(Color.red);
 		// g.fillRect((int) (x + bounds.x -
 		// handler.getGameCamera().getxOffset()),
 		// (int) (y + bounds.y - handler.getGameCamera().getyOffset()),
 		// bounds.width, bounds.height);
 	}
-
+	
+	public boolean isAlive(){
+		return alive;
+	}
+	
+	
 	private BufferedImage getCurrentAnimationFrame() {
 		if (xMove < 0) {
 			return animLeft.getCurrentFrame();

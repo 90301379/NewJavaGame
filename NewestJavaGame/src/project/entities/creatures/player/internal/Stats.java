@@ -5,19 +5,19 @@ import java.awt.image.BufferedImage;
 public class Stats {
 	
 	//General
-	private String name;
-	private BufferedImage image;
+	public String name;
+	public BufferedImage image;
 	
 	//Defense
-	private int health;
-	private int mana;
-	private int speed;
-	private int armor;
-	private int magicResist;
+	public int health;
+	public int mana;
+	public int speed;
+	public int armor;
+	public int magicResist;
 	
 	//Attack
-	private int ad;
-	private int ap;
+	public int ad;
+	public int ap;
 	
 	
 	public Stats(){
