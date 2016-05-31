@@ -10,8 +10,13 @@ import project.gfx.Animation;
 import project.gfx.Assets;
 import project.tileGame.Handler;
 
-public class TurretShotGreen extends Creature {
-
+public class Minnion extends Creature {
+	
+	//Search Phase
+	//Detect Phase
+	//Attack Phase
+	
+	
 	// Animations
 	private Animation animDown, animUp, animLeft, animRight;
 	// Attack timer
@@ -19,7 +24,7 @@ public class TurretShotGreen extends Creature {
 
 	private boolean alive = true;
 
-	public TurretShotGreen(Handler handler, float x, float y) {
+	public Minnion(Handler handler, float x, float y) {
 		super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
 		speed = 0.1f;

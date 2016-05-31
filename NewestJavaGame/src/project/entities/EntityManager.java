@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import project.entities.creatures.Minnion;
 import project.entities.creatures.Player;
 import project.entities.statics.GreenTower;
 import project.tileGame.Handler;
@@ -12,6 +13,7 @@ public class EntityManager {
 	
 	private Handler handler;
 	private Player player;
+	private Minnion minion;
 	private GreenTower tower;
 	private ArrayList<Entity> entities;
 	private Comparator<Entity> renderSorter = new Comparator<Entity>(){

@@ -51,7 +51,7 @@ public class World {
      	entityManager.addEntity(towerRed);
 
 		//Init Turret Shot Entities
-		turretShotGreen = new TurretShotGreen(handler, 170, 180);
+		turretShotGreen = new TurretShotGreen(handler, 384, 384);
      	entityManager.addEntity(turretShotGreen);
      	
 		entityManager.getPlayer().setX(spawnX);
@@ -62,12 +62,13 @@ public class World {
 	public void tick(){
 		
 		entityManager.tick();
-
-		turretShotGreen.followPlayer(entityManager.getPlayer());
+		
+		turretShotGreen.followPlayer(entityManager.getPlayer(), towerGreen);
 		
 	}
 	
 	public void render(Graphics g){
+		
 		int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
 		int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
 		int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
@@ -79,9 +80,9 @@ public class World {
 						(int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
 			}
 		}
+		
 		//Entities
 		entityManager.render(g);
-		
 		
 	}
 	
