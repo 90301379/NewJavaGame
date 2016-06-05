@@ -20,7 +20,11 @@ public class Assets {
 		SpriteSheet RotisserieR2 = new SpriteSheet(ImageLoader.loadImage("/textures/RM-WalkR2.png"));
 		SpriteSheet RotisserieIdle1 = new SpriteSheet(ImageLoader.loadImage("/textures/RM-IR.png"));
 		SpriteSheet RotisserieIdle2 = new SpriteSheet(ImageLoader.loadImage("/textures/RM-IR2.png"));
-
+		SpriteSheet Tower1 = new SpriteSheet(ImageLoader.loadImage("/textures/Tower1.png"));
+		SpriteSheet Tower2 = new SpriteSheet(ImageLoader.loadImage("/textures/Tower2.png"));
+		SpriteSheet Tower3 = new SpriteSheet(ImageLoader.loadImage("/textures/Tower3.png"));
+		SpriteSheet Tower4 = new SpriteSheet(ImageLoader.loadImage("/textures/Tower4.png"));
+		
 		btn_start = new BufferedImage[2];
 		btn_start[0] = sheet.crop(width * 6, height * 4, width * 2, height);
 		btn_start[1] = sheet.crop(width * 6, height * 5, width * 2, height);
@@ -61,14 +65,14 @@ public class Assets {
 		
 		tower = new BufferedImage[8];
 
-		tower[0] = sheet.crop(0, 0, width * 2, height * 3);
-		tower[1] = sheet.crop(0, height * 4, width * 2, height * 3);
-		tower[2] = sheet.crop(0, height * 4, width * 2, height * 3);
-		tower[3] = sheet.crop(0, height * 4, width * 2, height * 3);
-		tower[4] = sheet.crop(0, height * 4, width * 2, height * 3);
-		tower[5] = sheet.crop(0, height * 4, width * 2, height * 3);
-		tower[6] = sheet.crop(0, height * 4, width * 2, height * 3);
-		tower[7] = sheet.crop(0, height * 4, width * 2, height * 3);
+		tower[0] = Tower1.crop(0, 0, width * 3, height * 6);
+		tower[1] = Tower2.crop(0, 0, width * 3, height * 6);
+		tower[2] = Tower3.crop(0, 0, width * 3, height * 6);
+		tower[3] = Tower4.crop(0, 0, width * 3, height * 6);
+		tower[4] = Tower4.crop(0, 0, width * 3, height * 6);
+		tower[5] = Tower3.crop(0, 0, width * 3, height * 6);
+		tower[6] = Tower2.crop(0, 0, width * 3, height * 6);
+		tower[7] = Tower1.crop(0, 0, width * 3, height * 6);
 
 		
 		
